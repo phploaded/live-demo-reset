@@ -2,7 +2,7 @@
 error_reporting(0);
 /* =========================== SETTINGS START ============================ */
 
-$timeout = 10; /* in seconds */
+$timeout = 120; /* in seconds */
 $backup_folder_name = 'backup'; /* this is the backup of your original files, which gets replaced every time the demo expires */
 $reset_db_flag = "no"; /* if your demo does not use mysql db, use "no" instead of "yes" */
 $mysql_file = ''; /* applies when $reset_db_flag = "yes"; PHPMYADMIN dump sql file KEPT IN RESET INCLUDES FOLDER to be executed after clearing database */
@@ -18,7 +18,7 @@ $reset_db_host = "localhost"; /* MySQL database host */
 /* =========================== SETTINGS END ============================ */
 
 
-
+if($reset_db_flag=='yes'){
 $con = new mysqli($reset_db_host, $reset_db_user, $reset_db_password, $reset_db_name);
 
 if( !$con ){ 
@@ -27,6 +27,7 @@ die("connection object not created: ".mysqli_error($con));
 
 if( mysqli_connect_errno()){
 die("Connect failed: ".mysqli_connect_errno()." : ". mysqli_connect_error());
+}
 }
 
 function restore_reset_data($source, $dest){
